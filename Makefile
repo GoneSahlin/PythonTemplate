@@ -1,17 +1,18 @@
 VENV = .venv
+MODULE = module
 
 $(VENV): setup.cfg
 	python3 -m venv $(VENV)
-	$(VENV)/bin/pip install -e .[dev]
+	$(VENV)/bin/pip install -e $(MODULE)[dev]
 	touch $(VENV)
 
 .PHONY: run
 run: $(VENV)
-	$(VENV)/bin/python3 main.py
+	$(VENV)/bin/python3 $(MODULE)/main.py
 
 .PHONY: test
 test: $(VENV)
-	$(VENV)/bin/pytest .
+	$(VENV)/bin/pytest $(MODULE)
 
 .PHONY: lint
 lint: $(VENV)
